@@ -1,0 +1,4 @@
+{
+	"proc": "Příkaz volání procedury syntaxe: PROC ( NázevProcedury | [DynamickáDeklarace][ ,(Parametry) ] )",
+	"menu": "Menu (loop)"
+}

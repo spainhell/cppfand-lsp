@@ -44,7 +44,22 @@
 					"description": "Traces the communication between VS Code and the language server."
 				}
 			}
-		}
+		},
+		"languages": [
+			{
+				"id": "pcfand",
+				"extensions": [".pcfand_f"],
+				"aliases": ["PC FAND", "pcfand"],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "pcfand",
+				"scopeName": "source.pcfand",
+				"path": "./syntaxes/pcfand.tmLanguage.json"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

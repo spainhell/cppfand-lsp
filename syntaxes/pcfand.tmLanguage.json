@@ -1,0 +1,121 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "PC FAND",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#datatypes"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#methods"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.pcfand",
+					"match": "(?i)\\b(begin|end|var|catalog)\\b"
+				},
+				{
+					"name": "keyword.control.pcfand",
+					"match": "\\b(program|procedure|function|if|then|else|for|forall|while|do|repeat|until|case|in|of)\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.single.pcfand",
+			"begin": "'",
+			"end": "'",
+			"patterns": [
+                {
+                    "name": "constant.character.escape.pcfand",
+                    "match": "\\\\\\#\\d{2}"
+                }
+            ]
+		},
+		"numbers": {
+			"name": "constant.numeric.pcfand",
+			"match": "\\b(\\d+(\\.\\d+)?)\\b"
+		},
+		"datatypes": {
+			"patterns": [
+				{
+					"name": "storage.type.pcfand",
+					"match": "(?i)\\b(real|boolean|string|index of|record of|file\\.dbf|file\\.x|file)\\b"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.pcfand",
+					"match": "\\b(\\+|\\-|\\*|\\/|\\%|\\=|\\<|\\>|\\<=|\\>=|\\<>|\\:=|\\~|\\^|\\&|and|or|not|div|mod)\\b"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.block.pcfand",
+					"begin": "\\{",
+					"end": "\\}"
+				}
+			]
+		},
+		"methods": {
+			"patterns": [
+				{
+					"name": "support.function.pcfand",
+					"match": "\\b(abs|arctan|chr|cos|eof|eoln|exp|length|ln|ord|pred|read|readln|round|sin|sqr|sqrt|succ|tan|trunc|write|writeln)\\b"
+				},
+				{
+					"name": "support.function.pcfand",
+					"match": "\\b(cancel|char|check|checkfile|close|cond|copy|copyfile|edbreak|edit|equmask|exitcode|getenv|gettxt|merge|proc|puttxt|replace|report|str|trail|upcase)\\b"
+				},
+				{
+					"name": "support.function.pcfand",
+					"match": "\\b(edittxt|edkey|exit|getindex|link|menuloop|menubar|menu|mouseevent|owned|owner|portin|portout|pos|prompt|strdate|valdate|watch)\\b"
+				},
+				{
+					"name": "support.function.pcfand",
+					"match": "\\b(exitcode|edreckey|with graphics|with locked|with shared|with window)\\b"
+				}
+			]
+		},
+		"constants": {
+			"patterns": [
+				{
+					"name": "constant.language.pcfand",
+					"match": "\\b(true|false|maxrow|maxcol)\\b"
+				},
+				{
+					"name": "constant.language.pcfand",
+					"match": "\\\\\\#\\d{2}"
+				},
+				{
+					"name": "constant.language.pcfand",
+					"match": "\\b(Shift|Alt|Ctrl)F\\d(1|2)?\\b"
+				}
+			]
+		}
+	},
+	"scopeName": "source.fand"
+}

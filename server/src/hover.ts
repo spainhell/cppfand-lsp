@@ -1,16 +1,36 @@
-import { TextDocumentPositionParams, Hover, Position, Range } from 'vscode-languageserver';
+import { TextDocumentPositionParams, Hover, Position, Range, MarkupContent, MarkupKind } from 'vscode-languageserver';
 import { documents } from './server';
+import * as fs from 'fs';
 
 export function ProvideHover(params: TextDocumentPositionParams): Hover {
 	// Get the document
 	const document = documents.get(params.textDocument.uri);
 
 	// Get the word range at the position
-	const word = getWordRangeAtPosition(document?.getText(), params.position);
+	const wordPosition = getWordRangeAtPosition(document?.getText(), params.position);
+
+	const word = document?.getText(wordPosition!);
+
+	if (word === undefined || word?.trim() === '') {
+		return {
+			contents: ''
+		};
+	}
+
+	const markdownContent: MarkupContent = {
+		kind: MarkupKind.Markdown,
+		value: `**${word}** *${getDescription(word) || ''}*`
+	};
 
 	return {
-		contents: `Spelling matters for word: ${word}`
+		contents: markdownContent
 	};
+}
+
+function getDescription(keyword: string): string | undefined {
+	const hoverData = JSON.parse(fs.readFileSync('D:/PCFAND/LSP/server/src/hover.json', 'utf-8'));
+	const description = hoverData[keyword];
+	return description ? description : undefined;
 }
 
 function getWordRangeAtPosition(text: string | undefined, position: Position): Range | null {
