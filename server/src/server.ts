@@ -23,12 +23,14 @@ import {
 	TextDocument
 } from 'vscode-languageserver-textdocument';
 
+import { ProvideHover } from './hover';
+
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
 const connection = createConnection(ProposedFeatures.all);
 
 // Create a simple text document manager.
-const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
+export const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
 
 let hasConfigurationCapability = false;
 let hasWorkspaceFolderCapability = false;
@@ -61,7 +63,8 @@ connection.onInitialize((params: InitializeParams) => {
 			diagnosticProvider: {
 				interFileDependencies: false,
 				workspaceDiagnostics: false
-			}
+			},
+			hoverProvider: true
 		}
 	};
 	if (hasWorkspaceFolderCapability) {
@@ -244,6 +247,13 @@ connection.onCompletionResolve(
 		return item;
 	}
 );
+
+connection.onHover((params: TextDocumentPositionParams) => {
+	// Implement your logic here to return the hover information
+	// For example, you might look up information about the symbol at the given position
+	return ProvideHover(params);
+});
+
 
 // Make the text document manager listen on the connection
 // for open, change and close text document events
